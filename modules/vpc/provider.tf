@@ -13,7 +13,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      "Application" = "Kubernetes"
+      "Application" = "EKS-Cluster"
       "Tool"        = "Terragrunt-manage-resource"
     }
   }

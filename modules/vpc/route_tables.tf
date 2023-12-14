@@ -27,7 +27,7 @@ resource "aws_route" "public_igw" {
   ]
 }
 
-resource "aws_route" "private_igw" {
+resource "aws_route" "private_nat" {
   route_table_id         = aws_route_table.private_route.id
   nat_gateway_id         = aws_nat_gateway.nat_gw.id
   destination_cidr_block = "0.0.0.0/0"

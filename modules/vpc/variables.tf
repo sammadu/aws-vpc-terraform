@@ -1,46 +1,61 @@
+locals {
+  subnet_common_tags = {
+    "kubernetes.io/cluster/var.cluster_name" = "shared"
+  }
+}
+
 variable "region_name" {
 
     description = "AWS Region to launch VPC Network"
     type = string
-    default = "ap-south-1"
+    
   
 }
 
 variable "vpc_cidr_block" {
     description = "VPC CIDR Block"
     type = string
-    default = "10.10.0.0/16"
+    
   
 }
 
 variable "environment" {
     description = "Environment name for deployment"
     type = string
-    default = "dev"
+  
   
 }
 
 variable "public_subnets" {
 
     description = "Public Subnets Details for ENV"
-    type = list(string)
-    default = ["10.10.0.0/24", "10.10.2.0/24"]
+    type = map(any)
+    
   
 }
 
 variable "private_subnets" {
 
     description = "Private Subnet Details for ENV"
-    type = list(string)
-    default = [ "10.10.1.0/24", "10.10.3.0/24" ]
+    type = map(any)
+    
   
 }
 
-variable "public_az" {
-    description = "AZ names for public subnets"
-    type = list(string)
-    default = [ "ap-south-1a", "ap-south-1b" ]
-  
+variable "pub_sub_tags" {
+  description = "Provide tags that needs to be as part of EKS network to manage ELB internet-facing"
+  type        = map(any)
+  default = {
+    "kubernetes.io/role/elb" = "1"
+  }
+}
+
+variable "priv_sub_tags" {
+  description = "Provide tags that needs to be as part of EKS network to manage ELB internal-elb"
+  type        = map(any)
+  default = {
+    "kubernetes.io/role/internal-elb" = "1"
+  }
 }
 
 variable "private_az" {
